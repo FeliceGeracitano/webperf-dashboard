@@ -1,0 +1,14 @@
+{
+	"cron": "0 */10 * * * *",
+	"urls": [
+		{
+			"url": "https://google.com",
+			"plugins": [
+				{
+					"name": "lighthouse",
+					"report": true
+				}
+			]
+    }
+	]
+}
