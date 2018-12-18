@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "module": "commonjs",
+    "outDir": "build",
+    "sourceMap": true,
+    "target": "es5"
+  }
+}
