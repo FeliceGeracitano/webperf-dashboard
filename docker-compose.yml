@@ -18,19 +18,19 @@ services:
       - influxdb
 
   # DASHBOARD
-  # grafana:
-  #   image: grafana/grafana
-  #   ports:
-  #     - 80:3000
-  #   environment:
-  #     - GF_SECURITY_ADMIN_PASSWORD=secret
-  #   volumes:
-  #     - "./packages/dashboard/grafana/volume:/var/lib/grafana"
-  #     - "./packages/dashboard/grafana/provisioning:/etc/grafana/provisioning"
-  #     - "./packages/grafana/grafana.ini:/etc/grafana/grafana.ini"
-  #   depends_on:
-  #     - influxdb
-  #   user: ${CURRENT_UID}
+  grafana:
+    image: grafana/grafana
+    ports:
+      - 80:3000
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - "./packages/grafana/volume:/var/lib/grafana"
+      - "./packages/grafana/provisioning:/etc/grafana/provisioning"
+      - "./packages/grafana/grafana.ini:/etc/grafana/grafana.ini"
+    depends_on:
+      - influxdb
+    user: ${CURRENT_UID}
 
   # lighthouse
   # web-perf-lighthouse:
