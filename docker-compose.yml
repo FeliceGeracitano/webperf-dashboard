@@ -1,5 +1,6 @@
-version: "1"
+version: "3"
 services:
+  # DATABASE
   influxdb:
     image: "influxdb:latest"
     ports:
@@ -8,35 +9,40 @@ services:
       - INFLUXDB_ADMIN_USER=admin
       - INFLUXDB_ADMIN_PASSWORD=admin
     volumes:
-      - ./influxdb:/var/lib/influxdb
-  web-perf-lighthouse:
-    image: "web-perf-lighthouse"
-    ports:
-      - 3000:3000
-    environment:
-      - HOST=influxdb
-    volumes:
-      - ./config.json:/usr/src/web-perf-lighthouse/config.json
-      - ./plugins/web-perf-lighthouse/reports:/usr/src/web-perf-lighthouse/reports
-      - ./plugins/web-perf-lighthouse/logs:/usr/src/web-perf-lighthouse/logs
-    depends_on:
-      - influxdb
-  grafana:
-    image: grafana/grafana
-    ports:
-      - 80:3000
-    environment:
-      - GF_SECURITY_ADMIN_PASSWORD=secret
-    volumes:
-      - "./grafana_data:/var/lib/grafana"
-      - "./config/grafana/provisioning:/etc/grafana/provisioning"
-      - "./config/grafana/grafana.ini:/etc/grafana/grafana.ini"
-    depends_on:
-      - influxdb
-    user: ${CURRENT_UID}
+      - ./packages/influxdb/volume:/var/lib/influxdb
   chronograf:
     image: "chronograf:latest"
     ports:
       - 8888:8888
     depends_on:
       - influxdb
+
+  # DASHBOARD
+  # grafana:
+  #   image: grafana/grafana
+  #   ports:
+  #     - 80:3000
+  #   environment:
+  #     - GF_SECURITY_ADMIN_PASSWORD=secret
+  #   volumes:
+  #     - "./packages/dashboard/grafana/volume:/var/lib/grafana"
+  #     - "./packages/dashboard/grafana/provisioning:/etc/grafana/provisioning"
+  #     - "./packages/grafana/grafana.ini:/etc/grafana/grafana.ini"
+  #   depends_on:
+  #     - influxdb
+  #   user: ${CURRENT_UID}
+
+  # lighthouse
+  # web-perf-lighthouse:
+  #   image: "web-perf-lighthouse"
+  #   ports:
+  #     - 3000:3000
+  #   environment:
+  #     - HOST=influxdb
+  #   volumes:
+  #     - ./config.json:/usr/src/web-perf-lighthouse/config.json
+  #     - ./plugins/web-perf-lighthouse/reports:/usr/src/web-perf-lighthouse/reports
+  #     - ./plugins/web-perf-lighthouse/logs:/usr/src/web-perf-lighthouse/logs
+  #   depends_on:
+  #     - influxdb
+

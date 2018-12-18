@@ -1,4 +1,2 @@
-
-/plugins
-/influxdb
-/grafana_data
+/packages/dashboard/grafana/volume
+/packages/influxdb/volume
