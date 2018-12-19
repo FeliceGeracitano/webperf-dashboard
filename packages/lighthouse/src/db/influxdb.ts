@@ -6,7 +6,7 @@ import { IDB, IfilterResults } from './types';
 const { DBNAME } = constants;
 const DB = new influx.InfluxDB({
   host: process.env.HOST || 'localhost',
-  database: DBNAME,
+  database: DBNAME
 });
 
 export default {
@@ -36,5 +36,5 @@ export default {
     } catch (err) {
       console.error(`Failed to save lighthouse data for ${url}`, err);
     }
-  },
+  }
 } as IDB;

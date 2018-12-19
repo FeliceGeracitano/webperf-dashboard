@@ -33,7 +33,7 @@ export const Iaudits = {
   'unminified-css': {} as audits,
   'unminified-javascript': {} as audits,
   'uses-passive-event-listeners': {} as audits,
-  'uses-text-compression': {} as audits,
+  'uses-text-compression': {} as audits
 };
 
 export const Icategories = {
@@ -41,7 +41,7 @@ export const Icategories = {
   'best-practices': {} as catergoryScore,
   pwa: {} as catergoryScore,
   accessibility: {} as catergoryScore,
-  seo: {} as catergoryScore,
+  seo: {} as catergoryScore
 };
 
 export interface IlighthouseRespose {

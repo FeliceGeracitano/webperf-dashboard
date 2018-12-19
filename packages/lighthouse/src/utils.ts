@@ -17,7 +17,7 @@ const getMaxChildElementsCount = pipe(
 
 const launchChromeAndRunLighthouse = async (url, config): Promise<IlighthouseRespose> => {
   const chrome = await chromeLauncher.launch({
-    chromeFlags: ['--headless', '--no-zygote', '--no-sandbox'],
+    chromeFlags: ['--headless', '--no-zygote', '--no-sandbox']
   });
   const flags = { port: chrome.port, output: 'json' };
   const result = await lighthouse(url, flags, config);
@@ -55,7 +55,7 @@ export default {
   ): Promise<{ raw: IlighthouseRespose; filteredData: IfilterResults }> => {
     console.info(`Getting data for ${url}`);
     const lighthouseResponse = await launchChromeAndRunLighthouse(url, {
-      extends: 'lighthouse:default',
+      extends: 'lighthouse:default'
     });
     console.info(`Successfully got data for ${url}`);
     return { raw: lighthouseResponse, filteredData: filterResults(lighthouseResponse) };
@@ -76,5 +76,5 @@ export default {
       console.error(`Failed to generate report for ${url}`, err);
       return Promise.reject('Failed to generate report');
     }
-  },
+  }
 };
