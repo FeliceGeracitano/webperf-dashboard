@@ -1,9 +1,4 @@
 {
-  "cron": "0 */30 * * * *",
-  "urls": [
-    {
-      "url": "https://reactjs.org/",
-      "plugins": [{ "name": "lighthouse", "report": true }]
-    }
-  ]
+  "cron": "0 */10 * * * *",
+  "urls": [{ "url": "https://reactjs.org/", "options": { "report": true } }]
 }

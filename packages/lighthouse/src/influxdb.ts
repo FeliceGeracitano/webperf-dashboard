@@ -1,9 +1,10 @@
 import * as influx from 'influx';
-import constants from '../constants';
-import { IDB, IfilterResults } from './types';
+import { IDB, IDBPayload } from './types';
+import Logger from './logger';
+const console = new Logger('[DB Connector]: ');
 
 // DB instance
-const { DBNAME } = constants;
+const DBNAME = 'lighthouse';
 const DB = new influx.InfluxDB({
   host: process.env.HOST || 'localhost',
   database: DBNAME
@@ -14,16 +15,16 @@ export default {
     try {
       const names = await DB.getDatabaseNames();
       if (names.indexOf(DBNAME) === -1) {
-        console.info('Database does not exist. Creating database');
+        console.log('Database does not exist. Creating database');
         return DB.createDatabase(DBNAME);
       }
-      console.info('Database exist. Connection ready');
+      console.log('Database exist. Connection ready');
       return Promise.resolve();
     } catch (err) {
       return Promise.reject('Failed to initialise');
     }
   },
-  saveData: async (url: any, data: IfilterResults) => {
+  saveData: async (url: any, data: IDBPayload) => {
     try {
       const points = Object.keys(data).reduce((points, key) => {
         if (data[key])
@@ -31,10 +32,10 @@ export default {
         return points;
       }, []);
       const result = await DB.writePoints(points);
-      console.info(`Successfully saved lighthouse data for ${url}`);
+      console.log(`Successfully saved lighthouse data for ${url}`);
       return result;
     } catch (err) {
-      console.error(`Failed to save lighthouse data for ${url}`, err);
+      console.log(`Failed to save lighthouse data for ${url} ${JSON.stringify(err)}`);
     }
   }
 } as IDB;

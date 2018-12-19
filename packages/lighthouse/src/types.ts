@@ -1,21 +1,21 @@
-export interface IDB {
-  init(): Promise<any>;
-  saveData(url: string, data: IfilterResults): Promise<any>;
+// CONFIG
+export interface ICronConfig {
+  cron: string;
+  urls: { url: string; options: { report: true } }[];
 }
 
-export interface ReportData {}
-
-export interface audits {
-  description: string;
-  score: number | null | undefined;
-  rawValue: number;
+// LIGHTHOSUE
+export interface ILighthouseAuditReport {
+  raw: ILighthouseRespose;
+  dbPayload: IDBPayload;
 }
 
-export interface catergoryScore {
-  score: number;
+export interface ILighthouseRespose {
+  audits: typeof IAudits;
+  categories: typeof ICategories;
 }
 
-export const Iaudits = {
+export const IAudits = {
   // Performance Metrics
   'estimated-input-latency': {} as audits,
   'first-contentful-paint': {} as audits,
@@ -36,7 +36,7 @@ export const Iaudits = {
   'uses-text-compression': {} as audits
 };
 
-export const Icategories = {
+export const ICategories = {
   performance: {} as catergoryScore,
   'best-practices': {} as catergoryScore,
   pwa: {} as catergoryScore,
@@ -44,23 +44,29 @@ export const Icategories = {
   seo: {} as catergoryScore
 };
 
-export interface IlighthouseRespose {
-  audits: typeof Iaudits;
-  categories: typeof Icategories;
+interface audits {
+  description: string;
+  score: number | null | undefined;
+  rawValue: number;
 }
 
-export interface IfilterResults {
+export interface catergoryScore {
+  score: number;
+}
+
+// DB
+export interface IDB {
+  init(): Promise<any>;
+  saveData(url: string, data: IDBPayload): Promise<any>;
+}
+
+export interface IDBPayload {
   // general
   'accessibility-score': number;
   'best-practices-score': number;
   'performance-score': number;
   'pwa-score': number;
   'seo-score': number;
-
-  // others
-  'dom-max-child-elements': number;
-  'dom-max-depth': number;
-
   // performance audits
   'estimated-input-latency': number;
   'first-contentful-paint': number;
@@ -78,7 +84,6 @@ export interface IfilterResults {
   'unminified-javascript': number;
   'uses-passive-event-listeners': number;
   'uses-text-compression': number;
-
   // performance audits scores
   'estimated-input-latency-score': number;
   'first-contentful-paint-score': number;
@@ -96,4 +101,7 @@ export interface IfilterResults {
   'unminified-javascript-score': number;
   'uses-passive-event-listeners-score': number;
   'uses-text-compression-score': number;
+  // others
+  'dom-max-child-elements': number;
+  'dom-max-depth': number;
 }
