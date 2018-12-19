@@ -1,0 +1,28 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "lighthouse-build",
+      "type": "npm",
+      "script": "build",
+      "path": "packages/lighthouse/",
+      "problemMatcher": []
+    },
+    {
+      "label": "lighthouse-start-dev",
+      "type": "npm",
+      "script": "start",
+      "path": "packages/lighthouse/",
+      "problemMatcher": []
+    },
+    {
+      "label": "lighthouse-server",
+      "type": "npm",
+      "script": "serve",
+      "path": "packages/lighthouse/",
+      "problemMatcher": []
+    }
+  ]
+}
