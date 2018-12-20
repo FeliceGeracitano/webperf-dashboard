@@ -12,6 +12,7 @@ services:
       - ./packages/influxdb/volume:/var/lib/influxdb
   chronograf:
     image: "chronograf:latest"
+    entrypoint: "chronograf --influxdb-url=http://influxdb:8086"
     ports:
       - 8888:8888
     depends_on:
@@ -30,7 +31,6 @@ services:
       - "./packages/grafana/grafana.ini:/etc/grafana/grafana.ini"
     depends_on:
       - influxdb
-    user: ${CURRENT_UID}
 
   # lighthouse
   webperf-dashboard-lighthouse:

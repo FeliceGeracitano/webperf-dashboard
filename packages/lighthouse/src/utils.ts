@@ -4,6 +4,8 @@ import * as lighthouse from 'lighthouse';
 import * as ReportGenerator from 'lighthouse/lighthouse-core/report/report-generator';
 import * as path from 'path';
 import { path as Rpath, pipe } from 'ramda';
+import db from './influxdb';
+import Logger from './logger';
 import {
   IAudits,
   ICategories,
@@ -12,7 +14,7 @@ import {
   ILighthouseAuditReport,
   ILighthouseRespose
 } from './types';
-import Logger from './logger';
+
 const console = new Logger('[Audit tools]: ');
 
 const getMaxDOMDepthCount = pipe(
@@ -86,6 +88,7 @@ const auditAll = async (urls: ICronConfig['urls']): Promise<any> => {
   for (let { url, options } of urls) {
     console.log(`Analyzing ${url}...`);
     const report = await audit(url);
+    await db.saveData(url, report.dbPayload);
     if (options.report) await saveReport(url, report.raw);
   }
 };
