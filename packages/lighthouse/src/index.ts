@@ -7,7 +7,7 @@ import collect from './collect-route';
 import db from './influxdb';
 import { ICronConfig } from './types';
 import utils from './utils';
-import Logger from './Logger';
+import Logger from './logger';
 
 const { cron, urls } = config as ICronConfig;
 const app = express();

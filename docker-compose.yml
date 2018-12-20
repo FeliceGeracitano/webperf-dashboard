@@ -33,16 +33,13 @@ services:
     user: ${CURRENT_UID}
 
   # lighthouse
-  # web-perf-lighthouse:
-  #   image: "web-perf-lighthouse"
-  #   ports:
-  #     - 3000:3000
-  #   environment:
-  #     - HOST=influxdb
-  #   volumes:
-  #     - ./config.json:/usr/src/web-perf-lighthouse/config.json
-  #     - ./plugins/web-perf-lighthouse/reports:/usr/src/web-perf-lighthouse/reports
-  #     - ./plugins/web-perf-lighthouse/logs:/usr/src/web-perf-lighthouse/logs
-  #   depends_on:
-  #     - influxdb
-
+  webperf-dashboard-lighthouse:
+    image: "felicegeracitano/webperf-dashboard-lighthouse:latest"
+    ports:
+      - 3000:3000
+    environment:
+      - HOST=influxdb
+    volumes:
+      - ./config.json:/usr/src/webperf-dashboard-lighthouse/config.json
+    depends_on:
+      - influxdb
