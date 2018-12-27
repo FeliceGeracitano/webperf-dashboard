@@ -1,6 +1,5 @@
 /packages/grafana/volume
 /packages/influxdb/volume
 /packages/lighthouse/build
-/packages/lighthouse/config.json
 /packages/lighthouse/node_modules
 /packages/lighthouse/reports

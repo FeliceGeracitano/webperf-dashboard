@@ -69,13 +69,10 @@ const audit = async (url: string): Promise<ILighthouseAuditReport> => {
 const saveReport = async (url: string, data: ILighthouseRespose) => {
   try {
     const report = await ReportGenerator.generateReportHtml(data);
+    const site = url.replace(/(^\w+:|^)\/\//, '');
+    await fs.outputFile(path.join(__dirname, '../reports', site, `LATEST.html`), report);
     return fs.outputFile(
-      path.join(
-        __dirname,
-        '../reports',
-        url.replace(/(^\w+:|^)\/\//, ''),
-        `${new Date().toISOString()}.html`
-      ),
+      path.join(__dirname, '../reports', site, `${new Date().toISOString()}.html`),
       report
     );
   } catch (err) {
