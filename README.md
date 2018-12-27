@@ -19,7 +19,7 @@ $ cd packages/lighthouse && npm start
 
 ### Test local container for `packages/lighthouse`
 
-Repolace `felicegeracitano/webperf-dashboard-lighthouse` with
+In `docker-compose.yml` replace `felicegeracitano/webperf-dashboard-lighthouse` with
 `webperf-dashboard-lighthouse` (or any other local name you prefer), then run:
 
 ```
