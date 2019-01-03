@@ -15,9 +15,23 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 2,
-  "id": 6,
   "links": [],
-  "panels": [],
+  "panels": [
+    {
+      "content": "<center><h1>Summary Page TBD</h1></center>",
+      "gridPos": {
+        "h": 3,
+        "w": 11,
+        "x": 7,
+        "y": 0
+      },
+      "id": 2,
+      "links": [],
+      "mode": "html",
+      "title": "",
+      "type": "text"
+    }
+  ],
   "schemaVersion": 16,
   "style": "dark",
   "tags": [],
@@ -36,5 +50,5 @@
   "timezone": "",
   "title": "Summary",
   "uid": "9JBayNyik",
-  "version": 1
+  "version": 7
 }
