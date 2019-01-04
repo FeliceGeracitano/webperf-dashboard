@@ -1,6 +1,6 @@
 # WebPerformanceDashboard
 
-- [Motivations](#Motivations)
+- [Introduction](#Introduction)
 - [Requirements](#Requirements)
 - [Installation](#Installation)
 - [Run The project](#Run-The-project)
@@ -20,7 +20,7 @@ Web performance powered by Lighthouse, forked from by `https://github.com/boyney
 - Removed Pagespeed Insights since now is powered by lighthouse
 - Latest lighthouse
 - Grafana dashboards with more details
-- more to come.. (CI hook for Github PR)
+- more to come.. (CI hook for Github PR, more metrics)
 
 ### Requirements
 
@@ -63,11 +63,11 @@ example,
 
 ### Dashboards Built-in
 
-![Image of Single Page Dashboard](https://via.placeholder.com/150)
+![Image of Single Page Dashboard](https://raw.githubusercontent.com/FeliceGeracitano/webperf-dashboard/master/static/Single.png)
 
 Inspired by the lighthouse report, analyze score trend over time, identify performance metric and their thresholds. Read suggestions directly from Latest Lighthouse report embedded in the dashboard
 
-![Image of Versus Dashboard](https://via.placeholder.com/150)
+![Image of Versus Dashboard](https://raw.githubusercontent.com/FeliceGeracitano/webperf-dashboard/master/static/Versus.png)
 
 Pretty much a like Single Page Dashboard but oriented to `1vs1` or `all` comparision.
 
