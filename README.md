@@ -13,14 +13,15 @@
 
 ### Introduction
 
-Web performance powered by Lighthouse, forked from by `https://github.com/boyney123/garie` with addition of
+Web performance powered by Lighthouse, forked from by [https://github.com/boyney123/garie](https://github.com/boyney123/garie)
+with addition of
 
 - Typescript
 - Monorepo approach
 - Removed Pagespeed Insights since now is powered by lighthouse
 - Latest lighthouse
 - Grafana dashboards with more details
-- more to come.. (CI hook for Github PR, more metrics)
+- more to come.. (CI hook for Github PR, more metrics, parallel page analysis)
 
 ### Requirements
 
