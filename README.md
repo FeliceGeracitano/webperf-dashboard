@@ -36,7 +36,7 @@ $ docker push felicegeracitano/webperf-dashboard-lighthouse:latest
 ```
 
 > Tip:  
-> replace latest tag with fixed version etc 1.0, 2.0...
+> replace latest tag with fixed version etc 1.1, 2.0...
 
 ### Troubleshooting
 
