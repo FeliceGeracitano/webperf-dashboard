@@ -6,8 +6,8 @@
 - [Run The project](#Run-The-project)
 - [Configuration](#Configuration)
 - [Dashboards Built-in](#Dashboards-Built-in)
-- [Develop `packages/lighthouse`](#develop-`packages/lighthouse`)
-- [Test local container for `packages/lighthouse`](#Test-local-container-for-`packages/lighthouse`)
+- [Develop `packages/lighthouse`](#develop-packageslighthouse)
+- [Test local container for `packages/lighthouse`](#test-local-container-for-packageslighthouse)
 - [Deploy your container](#Deploy-your-container)
 - [Troubleshooting](#Troubleshooting)
 - [Other Tips](#Other-Tips)
@@ -60,18 +60,20 @@ example,
   ]
 }
 ```
+
 > Set `report` if you want to save lighthouse report as html.
 
 > More info about the cron pattern at https://www.npmjs.com/package/cron
 
 ### Dashboards Built-in
+
 - Single Audit
-![Image of Single Page Dashboard](https://raw.githubusercontent.com/FeliceGeracitano/webperf-dashboard/master/static/Single.png)
+  ![Image of Single Page Dashboard](https://raw.githubusercontent.com/FeliceGeracitano/webperf-dashboard/master/static/Single.png)
 
 Inspired by the lighthouse report, analyze score trend over time, identify performance metric and their thresholds. Read suggestions directly from Latest Lighthouse report embedded in the dashboard
 
 - Versus
-![Image of Versus Dashboard](https://raw.githubusercontent.com/FeliceGeracitano/webperf-dashboard/master/static/Versus.png)
+  ![Image of Versus Dashboard](https://raw.githubusercontent.com/FeliceGeracitano/webperf-dashboard/master/static/Versus.png)
 
 Pretty much a like Single Page Dashboard but oriented to `1vs1` or `all` comparision.
 
