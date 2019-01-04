@@ -5,6 +5,7 @@
 - [Installation](#Installation)
 - [Run The project](#Run-The-project)
 - [Configuration](#Configuration)
+- [Dashboards Built-in](#Dashboards-Built-in)
 - [Develop `packages/lighthouse`](#develop-`packages/lighthouse`)
 - [Test local container for `packages/lighthouse`](#Test-local-container-for-`packages/lighthouse`)
 - [Deploy your container](#Deploy-your-container)
@@ -13,7 +14,7 @@
 
 ### Introduction
 
-Web performance powered by Lighthouse, forked from by [https://github.com/boyney123/garie](https://github.com/boyney123/garie)
+Web performance powered by Lighthouse, forked from [https://github.com/boyney123/garie](https://github.com/boyney123/garie)
 with addition of
 
 - Typescript
@@ -59,8 +60,9 @@ example,
   ]
 }
 ```
+> Set `report` if you want to save lighthouse report as html.
 
-> more info about the cron pattern at https://www.npmjs.com/package/cron
+> More info about the cron pattern at https://www.npmjs.com/package/cron
 
 ### Dashboards Built-in
 
