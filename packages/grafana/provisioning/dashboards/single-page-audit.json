@@ -17,7 +17,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1546520477499,
+  "iteration": 1546602241723,
   "links": [
     {
       "icon": "external link",
@@ -1938,7 +1938,7 @@
       "type": "row"
     },
     {
-      "content": "<style>\n iframe {\n  width: 100%;\n  height: 100%;\n  transform: scale(1.7);\n  transform-origin: 0 0.5;\n  padding-top: 200px;\n  text-rendering: optimizeLegibility;\n\n }\n #site {\n   visibility: hidden;\n }\n</style>\n<div id=\"site\">$url</div>\n<iframe></iframe>\n<script>\n  iframe = document.querySelector('iframe');\n  site = document.querySelector('#site').innerHTML.replace(/(^\\w+:|^)\\/\\//, '');\n  iframe.src = `http://localhost:3000/reports/${site}/LATEST.html#performance`;\n</script>",
+      "content": "<style>\n iframe {\n  width: 100%;\n  height: 100%;\n  text-rendering: optimizeLegibility;\n\n }\n #site {\n   visibility: hidden;\n }\n</style>\n<div id=\"site\">$url</div>\n<iframe></iframe>\n<script>\n  iframe = document.querySelector('iframe');\n  site = document.querySelector('#site').innerHTML.replace(/(^\\w+:|^)\\/\\//, '');\n  iframe.src = `http://localhost:3000/reports/${site}/LATEST.html#performance`;\n</script>",
       "gridPos": {
         "h": 24,
         "w": 24,
@@ -1961,8 +1961,9 @@
       {
         "allValue": null,
         "current": {
-          "text": "https://vuejs.org",
-          "value": "https://vuejs.org"
+          "tags": [],
+          "text": "https://reactjs.org",
+          "value": "https://reactjs.org"
         },
         "datasource": "Lighthouse",
         "definition": "SHOW TAG VALUES WITH KEY = \"url\"",
@@ -1997,5 +1998,5 @@
   "timezone": "browser",
   "title": "Single Web Page Audit",
   "uid": "r1e9yNymz",
-  "version": 27
+  "version": 1
 }
