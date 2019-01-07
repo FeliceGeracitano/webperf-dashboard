@@ -14,7 +14,7 @@
 
 ### Introduction
 
-Web performance powered by Lighthouse, forked from [https://github.com/boyney123/garie](https://github.com/boyney123/garie)
+Web performance dashboard powered by Lighthouse, forked from [https://github.com/boyney123/garie](https://github.com/boyney123/garie)
 with addition of
 
 - Typescript
