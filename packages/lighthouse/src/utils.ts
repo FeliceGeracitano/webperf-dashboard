@@ -90,8 +90,48 @@ const auditAll = async (urls: ICronConfig['urls']): Promise<any> => {
   }
 };
 
+const green = '![#178239](https://placehold.it/15/178239/000000?text=+)';
+const orange = '![#e67700](https://placehold.it/15/e67700/000000?text=+)';
+const red = '![#c7221f](https://placehold.it/15/c7221f/000000?text=+)';
+const getColor = (score: number) => (score < 0.5 ? red : score < 0.9 ? orange : green); // TODO: get threshold from something else
+
+const toSeconds = milliseconds => `${(milliseconds / 1000).toPrecision(3)}s`;
+const toPercentage = score => `${score * 100}%`;
+const toPercentageToColor = score => `${getColor(score)} ${toPercentage(score)}`;
+
+// prettier-ignore
+const generateGitHubComment = (report: IDBPayload, raw: any): string => {
+  return `
+<details>
+<summary>AUDIT</summary>
+
+#### Categories
+|Category|Score|
+-|-
+|__Performance__|${toPercentageToColor(report['performance-score'])}|
+|__Accessibility__|${toPercentageToColor(report['accessibility-score'])}|
+|__Best Practices__|${toPercentageToColor(report['best-practices-score'])}|
+|__Seo__|${toPercentageToColor(report['seo-score'])}|
+|__PWA__|${toPercentageToColor(report['pwa-score'])}|
+
+
+#### Performance Breakdown
+|Metric|Time|Score|
+-|-|-
+|__First Contentful Paint__|${toSeconds(report['first-contentful-paint'])}|${toPercentageToColor(report['first-contentful-paint-score'])}|
+|__First Meaningful Paint__|${toSeconds(report['first-meaningful-paint'])}|${toPercentageToColor(report['first-meaningful-paint-score'])}|
+|__Speed Index__|${toSeconds(report['speed-index'])}|${toPercentageToColor(report['speed-index-score'])}|
+|__First CPU Idle__|${toSeconds(report['first-cpu-idle'])}|${toPercentageToColor(report['first-cpu-idle-score'])}|
+|__Time to Interactive__|${toSeconds(report.interactive)}|${toPercentageToColor(report['interactive-score'])}|
+|__Estimated Input Latency__|${report["estimated-input-latency"]}ms|${toPercentageToColor(report["estimated-input-latency-score"])}|
+
+</details>
+  `;
+};
+
 export default {
   audit,
-  saveReport,
-  auditAll
+  auditAll,
+  generateGitHubComment,
+  saveReport
 };

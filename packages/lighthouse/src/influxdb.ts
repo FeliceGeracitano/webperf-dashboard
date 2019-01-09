@@ -21,7 +21,7 @@ export default {
       console.log('Database exist. Connection ready');
       return Promise.resolve();
     } catch (err) {
-      return Promise.reject('Failed to initialise');
+      return Promise.reject('Database: Failed to initialise Connection');
     }
   },
   saveData: async (url: any, data: IDBPayload) => {
