@@ -9,6 +9,7 @@
 - [Develop `packages/lighthouse`](#develop-packageslighthouse)
 - [Test local container for `packages/lighthouse`](#test-local-container-for-packageslighthouse)
 - [Deploy your container](#Deploy-your-container)
+- [GitHub BOT](#GitHub-BOT)
 - [Troubleshooting](#Troubleshooting)
 - [Other Tips](#Other-Tips)
 
@@ -112,6 +113,22 @@ $ docker push felicegeracitano/webperf-dashboard-lighthouse:latest
 - Kills all running containers with `docker kill $(docker ps -q)`
 - Delete all stopped containers with `docker rm $(docker ps -a -q)`
 - Delete all images with `docker rmi $(docker images -q)`
+
+### GitHub BOT
+You can improve reviewers life running Lighthouse audit on every PR update.
+In this repo there is an example using a Travis CI, the job communicate progress and result to GitHub.
+Result:
+
+<img src="https://octodex.github.com/images/yaktocat.png" width=200>
+
+Configure your repo with a Travis Job:
+- Enbale Travis Intergation for your repo (https://travis-ci.com/)
+- Enable build on Pull request: https://travis-ci.com/{owner}/{repo}/settings
+- Generate Github Access token here: https://github.com/settings/tokens
+- Set enviroment an variable called `GITHUB_TOKEN` for your Travis job with the GitHub token here: https://travis-ci.com/{owner}/{repo}/settings
+- Commit a `.travis.yml` file in your repo similar to: https://github.com/FeliceGeracitano/webperf-dashboard/blob/master/.travis.yml
+NB: if you inspect run_audit.sh you will notice that you need to provide an url of your running up. this will be obsvously depending by the app itself, you can choose to build in the travis job itsels of provide an external URL previously built
+- `run_audit.sh` will launch the lighthouse service and inspectig your app, posting the result in the PR created.
 
 ### Other Tips
 
