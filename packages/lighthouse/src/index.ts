@@ -4,16 +4,18 @@ import * as express from 'express';
 import * as serveIndex from 'serve-index';
 import * as config from '../config.json';
 import collect from './collect-route';
+import hook from './hook-route';
 import db from './influxdb';
+import Logger from './logger';
 import { ICronConfig } from './types';
 import utils from './utils';
-import Logger from './logger';
 
 const { cron, urls } = config as ICronConfig;
 const app = express();
 const console = new Logger('[App]: ');
 
 app.use(bodyParser.json());
+app.use('/hook', hook);
 app.use('/collect', collect);
 app.use('/reports', express.static('reports'), serveIndex('reports', { icons: true }));
 app.listen(3000, async () => {

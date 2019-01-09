@@ -105,3 +105,5 @@ export interface IDBPayload {
   'dom-max-child-elements': number;
   'dom-max-depth': number;
 }
+
+export type GithubStatus = 'error' | 'failure' | 'pending' | 'success';
