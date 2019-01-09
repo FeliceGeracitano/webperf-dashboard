@@ -132,7 +132,7 @@ Configure your repo with a Travis Job:
 - Generate Github Access token here: https://github.com/settings/tokens
 - Set enviroment an variable called `GITHUB_TOKEN` for your Travis job with the GitHub token here: https://travis-ci.com/{owner}/{repo}/settings
 - Commit a `.travis.yml` file in your repo similar to: https://github.com/FeliceGeracitano/webperf-dashboard/blob/master/.travis.yml
-NB: if you inspect run_audit.sh you will notice that you need to provide an url of your running up. this will be obsvously depending by the app itself, you can choose to build in the travis job itsels of provide an external URL previously built
+> if you inspect run_audit.sh you will notice that you need to provide an url of your running up. This obsvously depends on your app, you can choose to build your app in the travis job itsels or provide an external URL.
 - `run_audit.sh` will launch the lighthouse service and inspectig your app, posting the result in the PR created.
 
 ### Other Tips
