@@ -19,7 +19,7 @@ DOCKER_IP=$(ifconfig docker0 | grep 'inet addr:' | awk '{print $2}' | sed 's/add
 LIGHTHOUSE_URL="http://$DOCKER_IP:3000/hook"
 ## App IP
 URL=$(ifconfig eth0 | grep 'inet addr:' | awk '{print $2}' | sed 's/addr:*//')
-DATA="{\"url\":\"https://reactjs.org\",\"owner\":\"$OWNER\",\"repo\":\"$REPO\",\"number\":\"$NUMBER\",\"token\":\"$GITHUB_TOKEN\"}"
+DATA="{\"url\":\"https://angular.io\",\"owner\":\"$OWNER\",\"repo\":\"$REPO\",\"number\":\"$NUMBER\",\"token\":\"$GITHUB_TOKEN\"}"
 
 echo "Waiting Lighthouse to be ready on port 3000..."
 while ! nc -z $DOCKER_IP 3000; do   
