@@ -117,9 +117,14 @@ $ docker push felicegeracitano/webperf-dashboard-lighthouse:latest
 ### GitHub BOT
 You can improve reviewers life running Lighthouse audit on every PR update.
 In this repo there is an example using a Travis CI, the job communicate progress and result to GitHub.
-Result:
 
-<img src="https://octodex.github.com/images/yaktocat.png" width=200>
+Running Job:
+<img src="https://raw.githubusercontent.com/FeliceGeracitano/webperf-dashboard/master/static/Travi%20Ci%20in%20Progress.png" width=800>
+
+Result Comment from the BOT:
+
+<img src="https://raw.githubusercontent.com/FeliceGeracitano/webperf-dashboard/master/static/Audit%20Report.png" width=600>
+
 
 Configure your repo with a Travis Job:
 - Enbale Travis Intergation for your repo (https://travis-ci.com/)
