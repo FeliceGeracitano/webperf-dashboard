@@ -96,7 +96,7 @@ const red = '![#c7221f](https://placehold.it/15/c7221f/000000?text=+)';
 const getColor = (score: number) => (score < 0.5 ? red : score < 0.9 ? orange : green); // TODO: get threshold from something else
 
 const toSeconds = milliseconds => `${(milliseconds / 1000).toPrecision(3)}s`;
-const toPercentage = score => `${score * 100}%`;
+const toPercentage = score => `${Math.round(score * 100)}%`;
 const toPercentageToColor = score => `${getColor(score)} ${toPercentage(score)}`;
 
 // prettier-ignore
