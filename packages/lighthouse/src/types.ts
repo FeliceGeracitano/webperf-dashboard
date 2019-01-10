@@ -33,7 +33,8 @@ export const IAudits = {
   'unminified-css': {} as audits,
   'unminified-javascript': {} as audits,
   'uses-passive-event-listeners': {} as audits,
-  'uses-text-compression': {} as audits
+  'uses-text-compression': {} as audits,
+  'network-requests': {} as audits
 };
 
 export const ICategories = {
@@ -104,6 +105,7 @@ export interface IDBPayload {
   // others
   'dom-max-child-elements': number;
   'dom-max-depth': number;
+  'network-requests': number;
 }
 
 export type GithubStatus = 'error' | 'failure' | 'pending' | 'success';
