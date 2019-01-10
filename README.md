@@ -23,7 +23,7 @@ with addition of
 - Removed Pagespeed Insights since now is powered by lighthouse
 - Latest lighthouse
 - Grafana dashboards with more details
-- more to come.. (CI hook for Github PR, more metrics, parallel page analysis)
+- more to come.. (Performance delta on target Branch, more metrics, parallel page analysis)
 
 ### Requirements
 
