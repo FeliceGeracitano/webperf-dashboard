@@ -20,7 +20,8 @@ with addition of
 
 - Typescript
 - Monorepo approach
-- Removed Pagespeed Insights since now is powered by lighthouse
+- GitHub BOT
+- Removed Pagespeed Insights (now powered by lighthouse)
 - Latest lighthouse
 - Grafana dashboards with more details
 - more to come.. (Performance delta on target Branch, more metrics, parallel page analysis)
