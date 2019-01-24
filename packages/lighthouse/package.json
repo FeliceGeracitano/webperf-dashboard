@@ -19,7 +19,7 @@
     "felicegeracitano": "^1.0.1",
     "fs-extra": "7.0.1",
     "influx": "5.0.7",
-    "lighthouse": "4.0.0-beta",
+    "lighthouse": "4.0.0",
     "node-fetch": "2.3.0",
     "ramda": "0.26.1",
     "serve-index": "1.9.1",
