@@ -1,0 +1,56 @@
+# Section: grafana service
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: webperf
+  name: grafana
+spec:
+  ports:
+    - port: 3000
+      targetPort: 3000
+      nodePort: 30000
+      name: server
+  selector:
+    app: grafana
+  type: NodePort
+---
+# Section: grafana deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: webperf
+  name: grafana
+  labels:
+    app: grafana
+    component: grafana
+spec:
+  strategy:
+    type: "Recreate"
+  selector:
+    matchLabels:
+      app: grafana
+  replicas: 1
+  template:
+    metadata:
+      name: grafana
+      labels:
+        app: grafana
+        component: grafana
+    spec:
+      containers:
+        - name: grafana
+          image: grafana/grafana:5.4.3
+          ports:
+            - containerPort: 3000
+              name: server
+          volumeMounts:
+            - mountPath: /etc/grafana/provisioning
+              name: provisioning-volume
+          env:
+            - name: GF_SECURITY_ADMIN_PASSWORD
+              value: secret
+      volumes:
+        - name: provisioning-volume
+          hostPath:
+            path: /Users/fgeracitano/git/webperf-dashboard/packages/grafana/provisioning
+            type: Directory

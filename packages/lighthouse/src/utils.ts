@@ -9,7 +9,6 @@ import Logger from './logger';
 import {
   IAudits,
   ICategories,
-  ICronConfig,
   IDBPayload,
   ILighthouseAuditReport,
   ILighthouseRespose
@@ -25,16 +24,6 @@ const getMaxChildElementsCount = pipe(
   Rpath(['audits', 'dom-size', 'details', 'items', 2, 'value']),
   parseFloat
 );
-
-const launchChromeAndRunLighthouse = async (url, config): Promise<ILighthouseRespose> => {
-  const chrome = await chromeLauncher.launch({
-    chromeFlags: ['--headless', '--no-zygote', '--no-sandbox']
-  });
-  const flags = { port: chrome.port, output: 'json' };
-  const result = await lighthouse(url, flags, config);
-  await chrome.kill();
-  return result.lhr;
-};
 
 const filterResults = (data: ILighthouseRespose): IDBPayload => {
   const { categories, audits } = data;
@@ -59,11 +48,13 @@ const filterResults = (data: ILighthouseRespose): IDBPayload => {
 
 const audit = async (url: string): Promise<ILighthouseAuditReport> => {
   console.log(`Getting data for ${url}`);
-  const lighthouseResponse = await launchChromeAndRunLighthouse(url, {
-    extends: 'lighthouse:default'
-  });
+  const chromeFlags = ['--headless', '--disable-extensions', '--no-zygote', '--no-sandbox'];
+  const chrome = await chromeLauncher.launch({ chromeFlags });
+  const lhFlags = { port: chrome.port };
+  const result = await lighthouse(url, lhFlags);
+  const raw = await chrome.kill().then(() => result.lhr);
   console.log(`Successfully got data for ${url}`);
-  return { raw: lighthouseResponse, dbPayload: filterResults(lighthouseResponse) };
+  return { raw, dbPayload: filterResults(raw) };
 };
 
 const saveReport = async (url: string, data: ILighthouseRespose) => {
@@ -78,15 +69,6 @@ const saveReport = async (url: string, data: ILighthouseRespose) => {
   } catch (err) {
     console.log(`Failed to generate report for ${url} ${JSON.stringify(err)}`);
     return Promise.reject('Failed to generate report');
-  }
-};
-
-const auditAll = async (urls: ICronConfig['urls']): Promise<any> => {
-  for (let { url, options } of urls) {
-    console.log(`Analyzing ${url}...`);
-    const report = await audit(url);
-    await db.saveData(url, report.dbPayload);
-    if (options.report) await saveReport(url, report.raw);
   }
 };
 
@@ -131,7 +113,6 @@ const generateGitHubComment = (report: IDBPayload, raw: any): string => {
 
 export default {
   audit,
-  auditAll,
   generateGitHubComment,
   saveReport
 };

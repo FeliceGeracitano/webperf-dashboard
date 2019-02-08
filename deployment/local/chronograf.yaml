@@ -1,0 +1,103 @@
+---
+# Section: chronograf configmap
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: webperf
+  name: chronograf
+  labels:
+    app: chronograf
+    component: chronograf
+data:
+  monitor.src: |-
+    {
+      "id": "5000",
+      "name": "internal",
+      "url": "http://{{ .INFLUXDB_SERVICE_HOST }}:{{ .INFLUXDB_SERVICE_PORT}}",
+      "type": "influx",
+      "insecureSkipVerify": false,
+      "default": true,
+      "telegraf": "cloud",
+      "organization": "influx"
+    }
+---
+# Section: chronograf service
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: webperf
+  name: chronograf
+spec:
+  ports:
+    - port: 80
+      targetPort: 8888
+      nodePort: 30002
+      name: server
+  selector:
+    app: chronograf
+  type: NodePort
+---
+# Section: chronograf deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: webperf
+  name: chronograf
+  labels:
+    app: chronograf
+    component: chronograf
+spec:
+  strategy:
+    type: "Recreate"
+  selector:
+    matchLabels:
+      app: chronograf
+  replicas: 1
+  template:
+    metadata:
+      name: chronograf
+      labels:
+        app: chronograf
+        component: chronograf
+    spec:
+      containers:
+        - name: chronograf
+          image: docker.io/chronograf:1.7
+          env:
+            - name: RESOURCES_PATH
+              value: "/usr/share/chronograf/resources"
+            - name: LOG_LEVEL
+              value: "error"
+          ports:
+            - containerPort: 8888
+              name: server
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/chronograf
+            - name: config
+              mountPath: /usr/share/chronograf/resources
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: chronograf
+        - name: config
+          configMap:
+            name: chronograf
+---
+# Section: chronograf service
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  namespace: webperf
+  name: chronograf
+  labels:
+    app: chronograf
+    component: chronograf
+spec:
+  accessModes:
+    - "ReadWriteOnce"
+  resources:
+    requests:
+      storage: 1Gi
+---
+

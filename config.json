@@ -1,8 +1,0 @@
-{
-  "cron": "0 */10 * * * *",
-  "urls": [
-    { "url": "https://reactjs.org", "options": { "report": true } },
-    { "url": "https://vuejs.org", "options": { "report": true } },
-    { "url": "https://angular.io", "options": { "report": true } }
-  ]
-}
