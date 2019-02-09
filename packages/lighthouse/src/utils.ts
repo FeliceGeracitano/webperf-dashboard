@@ -1,6 +1,7 @@
 import * as chromeLauncher from 'chrome-launcher';
 import * as fs from 'fs-extra';
 import * as lighthouse from 'lighthouse';
+import * as lighthouseLog from 'lighthouse-logger';
 import * as ReportGenerator from 'lighthouse/lighthouse-core/report/report-generator';
 import * as path from 'path';
 import { path as Rpath, pipe } from 'ramda';
@@ -48,9 +49,11 @@ const filterResults = (data: ILighthouseRespose): IDBPayload => {
 
 const audit = async (url: string): Promise<ILighthouseAuditReport> => {
   console.log(`Getting data for ${url}`);
-  const chromeFlags = ['--headless', '--disable-extensions', '--no-zygote', '--no-sandbox'];
-  const chrome = await chromeLauncher.launch({ chromeFlags });
-  const lhFlags = { port: chrome.port };
+  const chromeFlags = ['--headless', '--no-sandbox', '--disable-gpu'];
+  console.log(`chromeFlags: ${JSON.stringify(chromeFlags)}`);
+  const chrome = await chromeLauncher.launch({ chromeFlags, startingUrl: url });
+  const lhFlags = { port: chrome.port, logLevel: 'info', emulatedFormFactor: 'desktop' };
+  lighthouseLog.setLevel(lhFlags.logLevel);
   const result = await lighthouse(url, lhFlags);
   const raw = await chrome.kill().then(() => result.lhr);
   console.log(`Successfully got data for ${url}`);

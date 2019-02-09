@@ -7,7 +7,7 @@ cd test-web-app && npm install && npm run build
 npx serve -s build &
 
 # Run Lighthouse
-docker run --rm -d -p 3000:3000/tcp felicegeracitano/webperf-dashboard-lighthouse
+docker run --rm -d -p 3000:3000/tcp felicegeracitano/webperf-dashboard-lighthouse:1.1.1
 
 # -- PARAMS --
 ## GitHub
