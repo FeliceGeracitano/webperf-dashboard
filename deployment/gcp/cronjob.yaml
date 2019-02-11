@@ -5,7 +5,7 @@ metadata:
   namespace: webperf
   name: audit-urls
 spec:
-  schedule: "0 * * * *"
+  schedule: "*/30 * * * *"
   successfulJobsHistoryLimit: 3
   failedJobsHistoryLimit: 3
   jobTemplate:
@@ -19,25 +19,12 @@ spec:
               args: [
                 'set -x;
                  declare -a arr=(
-                  "https://www.saksfifthavenue.com"
-                  "https://m.saks.com"
-                  "https://www.lordandtaylor.com"
-                  "https://www.thebay.com"
-                  "https://m.thebay.com"
-                  "https://www.saksoff5th.com"
-                  "https://m.saksoff5th.com"
-
-                  "https://shop.nordstrom.com"
-                  "https://m.shop.nordstrom.com"
-                  "https://www.macys.com"
-                  "https://www.neimanmarcus.com"
-                  "https://www.gilt.com"
-                  "https://www.barneys.com"
-                  "https://www.bloomingdales.com"
-                  "https://m.bloomingdales.com"
+                  "https://www.angular.com"
+                  "https://www.reactjs.org"
+                  "https://www.vuejs.org"
                   );
                  for i in "${arr[@]}";
-                  do curl -s --request POST --url http://lighthouse.webperf:3000/collect-one --header "Content-Type: application/json" --data "{ \"url\": \"$i\", \"report\": true }";
+                  do curl --request POST --url http://lighthouse.webperf:3000/collect-one --header "Content-Type: application/json" --data "{ \"url\": \"$i\", \"report\": true }";
                  done;
                 ',
               ]

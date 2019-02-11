@@ -27,7 +27,7 @@
       "targetBlank": true,
       "title": "Reports",
       "type": "link",
-      "url": "http://localhost:30003/reports/"
+      "url": "http://$LIGHTHOUSE_BASE_URL/reports/"
     }
   ],
   "panels": [
@@ -2282,7 +2282,7 @@
       "type": "row"
     },
     {
-      "content": "<style>\n iframe {\n  width: 100%;\n  height: 100%;\n  text-rendering: optimizeLegibility;\n\n }\n #site {\n   visibility: hidden;\n }\n</style>\n<div id=\"site\">$url</div>\n<iframe></iframe>\n<script>\n  iframe = document.querySelector('iframe');\n  site = document.querySelector('#site').innerHTML.replace(/(^\\w+:|^)\\/\\//, '');\n  iframe.src = `http://localhost:30003/reports/${site}/LATEST.html#performance`;\n</script>",
+      "content": "<style>\n iframe {\n  width: 100%;\n  height: 100%;\n  text-rendering: optimizeLegibility;\n\n }\n #site {\n   visibility: hidden;\n }\n</style>\n<div id=\"site\">$url</div>\n<iframe></iframe>\n<script>\n  iframe = document.querySelector('iframe');\n  site = document.querySelector('#site').innerHTML.replace(/(^\\w+:|^)\\/\\//, '');\n  iframe.src = `http://$LIGHTHOUSE_BASE_URL/reports/${site}/LATEST.html#performance`;\n</script>",
       "gridPos": {
         "h": 24,
         "w": 24,
@@ -2326,11 +2326,30 @@
         "tagsQuery": "",
         "type": "query",
         "useTags": false
+      },
+      {
+        "current": {
+          "text": "localhost",
+          "value": "localhost"
+        },
+        "hide": 2,
+        "label": null,
+        "name": "LIGHTHOUSE_HOST",
+        "options": [
+          {
+            "selected": true,
+            "text": "localhost",
+            "value": "localhost"
+          }
+        ],
+        "query": "localhost",
+        "skipUrlSync": false,
+        "type": "constant"
       }
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {
