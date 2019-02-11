@@ -1,0 +1,31 @@
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  namespace: webperf
+  name: audit-urls
+spec:
+  schedule: "*/30 * * * *"
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: audit-urls
+              image: ellerbrock/alpine-bash-curl-ssl
+              command: ["bash", "-c"]
+              args: [
+                'set -x;
+                 declare -a arr=(
+                  "https://www.angular.com"
+                  "https://www.reactjs.org"
+                  "https://www.vuejs.org"
+                  );
+                 for i in "${arr[@]}";
+                  do curl --request POST --url http://lighthouse.webperf:3000/collect-one --header "Content-Type: application/json" --data "{ \"url\": \"$i\", \"report\": true }";
+                 done;
+                ',
+              ]
+          restartPolicy: Never

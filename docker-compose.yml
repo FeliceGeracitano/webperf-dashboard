@@ -34,7 +34,7 @@ services:
 
   # lighthouse
   webperf-dashboard-lighthouse:
-    image: "felicegeracitano/webperf-dashboard-lighthouse:latest"
+    image: "felicegeracitano/webperf-dashboard-lighthouse:2.0"
     ports:
       - 3000:3000
     environment:

@@ -3,9 +3,11 @@ FROM node:11.3.0
 RUN mkdir -p /usr/src/webperf-dashboard-lighthouse
 WORKDIR /usr/src/webperf-dashboard-lighthouse
 
-COPY package.json .
+COPY . .
 
 RUN npm install
+RUN npm run build
+
 
 # Install Google Chrome
 RUN \
@@ -14,8 +16,6 @@ RUN \
   apt-get update && \
   apt-get install -y google-chrome-stable
 
-COPY . .
-
 EXPOSE 3000
 
-CMD ["npm", "start"]
+CMD ["npm", "run", "serve"]

@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: grafana
+    component: grafana
+  name: grafana-loadbalancer
+  namespace: webperf
+spec:
+  externalTrafficPolicy: Cluster
+  ports:
+    - nodePort: 32349
+      port: 80
+      protocol: TCP
+      targetPort: 3000
+  selector:
+    app: grafana
+  sessionAffinity: None
+  type: LoadBalancer
+status:
+  loadBalancer: {}
+---
+# Section: grafana deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: webperf
+  name: grafana
+  labels:
+    app: grafana
+    component: grafana
+spec:
+  strategy:
+    type: "Recreate"
+  selector:
+    matchLabels:
+      app: grafana
+  template:
+    metadata:
+      name: grafana
+      labels:
+        app: grafana
+        component: grafana
+    spec:
+      containers:
+        - name: grafana
+          image: grafana/grafana:5.4.3
+          ports:
+            - containerPort: 3000
+              name: server
+          resources:
+          env:
+            - name: GF_SECURITY_ADMIN_PASSWORD
+              value: secret

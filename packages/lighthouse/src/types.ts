@@ -1,9 +1,3 @@
-// CONFIG
-export interface ICronConfig {
-  cron: string;
-  urls: { url: string; options: { report: true } }[];
-}
-
 // LIGHTHOSUE
 export interface ILighthouseAuditReport {
   raw: ILighthouseRespose;
@@ -109,3 +103,10 @@ export interface IDBPayload {
 }
 
 export type GithubStatus = 'error' | 'failure' | 'pending' | 'success';
+
+// API Collect
+export interface CollectItem {
+  url: string;
+  report: boolean;
+}
+export type CollectAPIPayload = CollectItem[];

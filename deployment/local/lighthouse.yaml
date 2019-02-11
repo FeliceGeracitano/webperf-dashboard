@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: webperf
+  name: lighthouse
+  labels:
+    app: lighthouse
+spec:
+  selector:
+    matchLabels:
+      app: lighthouse
+  template:
+    metadata:
+      labels:
+        app: lighthouse
+    spec:
+      containers:
+        - name: lighthouse
+          image: felicegeracitano/webperf-dashboard-lighthouse:2.0
+          ports:
+            - containerPort: 3000
+          resources:
+          env:
+            - name: HOST
+              value: influxdb
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: webperf
+  name: lighthouse
+spec:
+  ports:
+    - port: 3000
+      targetPort: 3000
+      nodePort: 30003
+  selector:
+    app: lighthouse
+  type: NodePort

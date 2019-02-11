@@ -1,0 +1,81 @@
+# Section: influxdb service
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: webperf
+  name: influxdb
+  labels:
+    component: influxdb
+    app: influxdb
+spec:
+  clusterIP: None
+  ports:
+    - port: 8086
+      name: server
+  selector:
+    component: influxdb
+  publishNotReadyAddresses: true
+---
+# Section: influxdb statefulset
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  namespace: webperf
+  name: influxdb
+  labels:
+    component: influxdb
+    app: influxdb
+spec:
+  serviceName: influxdb
+  selector:
+    matchLabels:
+      component: influxdb
+  replicas: 1
+  template:
+    metadata:
+      name: influxdb
+      labels:
+        component: influxdb
+        app: influxdb
+    spec:
+      containers:
+        - name: influxdb
+          image: docker.io/influxdb:1.6
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - /bin/sh
+                  - "-c"
+                  - until curl -s http://localhost:8086/ping; do sleep 1; done; influx -execute "CREATE DATABASE \"${MONITOR_DATABASE}\" WITH DURATION 600d NAME ${MONITOR_RP}"
+          env:
+            - name: INFLUXDB_IFQL_ENABLED
+              value: "true"
+            - name: INFLUXDB_LOGGING_LEVEL
+              value: "error"
+            - name: INFLUXDB_HTTP_LOG_ENABLED
+              value: "false"
+            - name: MONITOR_RP
+              value: "autogen"
+            - name: MONITOR_DATABASE
+              value: "lighthouse"
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/influxdb
+          ports:
+            - containerPort: 8086
+              name: server
+            - containerPort: 8082
+              name: ifql
+  volumeClaimTemplates:
+    - metadata:
+        namespace: webperf
+        name: data
+      spec:
+        accessModes:
+          - "ReadWriteOnce"
+        resources:
+          requests:
+            storage: 10Gi
+---
+# vim:set et sw=2 foldmethod=expr foldexpr=getline(v\:lnum)=~'^#\ Section\:'?'>1'\:getline(v\:lnum)=~#'^fu'?'a1'\:getline(v\:lnum)=~#'^endf'?'s1'\:'=':
