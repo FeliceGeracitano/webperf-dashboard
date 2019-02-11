@@ -1,18 +1,24 @@
-# Section: grafana service
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   namespace: webperf
-#   name: grafana
-# spec:
-#   ports:
-#     - port: 3000
-#       targetPort: 3000
-#       nodePort: 30000
-#       name: server
-#   selector:
-#     app: grafana
-#   type: LoadBalancer
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: grafana
+    component: grafana
+  name: grafana-loadbalancer
+  namespace: webperf
+spec:
+  externalTrafficPolicy: Cluster
+  ports:
+    - nodePort: 32349
+      port: 80
+      protocol: TCP
+      targetPort: 3000
+  selector:
+    app: grafana
+  sessionAffinity: None
+  type: LoadBalancer
+status:
+  loadBalancer: {}
 ---
 # Section: grafana deployment
 apiVersion: apps/v1
