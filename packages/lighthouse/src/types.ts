@@ -108,5 +108,6 @@ export type GithubStatus = 'error' | 'failure' | 'pending' | 'success';
 export interface CollectItem {
   url: string;
   report: boolean;
+  lhFlags?: any;
 }
 export type CollectAPIPayload = CollectItem[];

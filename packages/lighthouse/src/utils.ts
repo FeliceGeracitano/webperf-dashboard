@@ -47,12 +47,18 @@ const filterResults = (data: ILighthouseRespose): IDBPayload => {
   return report;
 };
 
-const audit = async (url: string): Promise<ILighthouseAuditReport> => {
+const getLHFlags = (port, lhFlagsOverride = {}) => ({
+  port,
+  logLevel: 'info',
+  ...lhFlagsOverride
+});
+
+const audit = async (url: string, lhFlagsOverride?): Promise<ILighthouseAuditReport> => {
   console.log(`Getting data for ${url}`);
-  const chromeFlags = ['--headless', '--no-sandbox', '--disable-gpu'];
+  const chromeFlags = ['--headless', '--no-sandbox', '--no-zygote', '--disable-gpu'];
   console.log(`chromeFlags: ${JSON.stringify(chromeFlags)}`);
-  const chrome = await chromeLauncher.launch({ chromeFlags, startingUrl: url });
-  const lhFlags = { port: chrome.port, logLevel: 'info', emulatedFormFactor: 'desktop' };
+  const chrome = await chromeLauncher.launch({ chromeFlags });
+  const lhFlags = getLHFlags(chrome.port, lhFlagsOverride);
   lighthouseLog.setLevel(lhFlags.logLevel);
   const result = await lighthouse(url, lhFlags);
   const raw = await chrome.kill().then(() => result.lhr);

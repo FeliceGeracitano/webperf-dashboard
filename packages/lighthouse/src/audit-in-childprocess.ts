@@ -6,9 +6,9 @@ const console = new Logger('[App]: ');
 
 async function runLighthouse(item: CollectItem) {
   try {
-    const { url, report } = item;
+    const { url, report, lhFlags } = item;
     if (!url) return undefined;
-    const { raw, dbPayload } = await utils.audit(url);
+    const { raw, dbPayload } = await utils.audit(url, lhFlags);
     if (report) await utils.saveReport(url, raw);
     db.saveData(url, dbPayload);
     return { [url]: dbPayload };

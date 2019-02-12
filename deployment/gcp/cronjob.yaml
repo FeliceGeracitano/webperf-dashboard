@@ -18,13 +18,28 @@ spec:
               command: ["bash", "-c"]
               args: [
                 'set -x;
-                 declare -a arr=(
-                  "https://www.angular.com"
-                  "https://www.reactjs.org"
-                  "https://www.vuejs.org"
+                 declare -a arr_desk=(
+                    "https://www.saksfifthavenue.com"
+                    "https://www.lordandtaylor.com"
+                    "https://www.thebay.com"
+                    "https://www.saksoff5th.com"
+                    "https://shop.nordstrom.com"
+                    "https://www.macys.com"
+                    "https://www.neimanmarcus.com"
+                    "https://www.bloomingdales.com"
                   );
-                 for i in "${arr[@]}";
-                  do curl --request POST --url http://lighthouse.webperf:3000/collect-one --header "Content-Type: application/json" --data "{ \"url\": \"$i\", \"report\": true }";
+                 for i in "${arr_desk[@]}";
+                  do curl --max-time 300 --connect-timeout 60 --request POST --url http://lighthouse.webperf:3000/collect-one --header "Content-Type: application/json" --data "{ \"url\": \"$i\", \"report\": true}";
+                 done;
+                  declare -a arr_mob=(
+                    "https://m.saks.com"
+                    "https://m.thebay.com"
+                    "https://m.saksoff5th.com"
+                    "https://m.shop.nordstrom.com"
+                    "https://m.bloomingdales.com"
+                  );
+                 for i in "${arr_mob[@]}";
+                  do curl --max-time 300 --connect-timeout 60 --request POST --url http://lighthouse.webperf:3000/collect-one --header "Content-Type: application/json" --data "{ \"url\": \"$i\", \"report\": true, \"emulate\": \"mobile\"}";
                  done;
                 ',
               ]

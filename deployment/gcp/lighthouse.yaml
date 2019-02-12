@@ -51,7 +51,7 @@ spec:
     spec:
       containers:
         - name: lighthouse
-          image: felicegeracitano/webperf-dashboard-lighthouse:2.0
+          image: felicegeracitano/webperf-dashboard-lighthouse:2.0.3
           ports:
             - containerPort: 3000
           resources:

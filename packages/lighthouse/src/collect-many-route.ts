@@ -4,7 +4,7 @@ import { join } from 'path';
 import Logger from './logger';
 import { CollectAPIPayload } from './types';
 const router = express.Router();
-const console = new Logger('[APP Collect Endpoint]: ');
+const console = new Logger('[APP Collect Many Endpoint]: ');
 
 function runInParallel(iterable) {
   const promises = iterable.map(

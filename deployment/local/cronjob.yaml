@@ -24,7 +24,7 @@ spec:
                   "https://www.vuejs.org"
                   );
                  for i in "${arr[@]}";
-                  do curl --request POST --url http://lighthouse.webperf:3000/collect-one --header "Content-Type: application/json" --data "{ \"url\": \"$i\", \"report\": true }";
+                  do curl --max-time 300 --connect-timeout 60 --request POST --url http://lighthouse.webperf:3000/collect-one --header "Content-Type: application/json" --data "{ \"url\": \"$i\", \"report\": true }";
                  done;
                 ',
               ]
