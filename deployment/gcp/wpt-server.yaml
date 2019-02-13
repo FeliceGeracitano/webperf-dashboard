@@ -31,7 +31,6 @@ spec:
       containers:
         - name: wpt-server
           image: felicegeracitano/local-wptserver
-          imagePullPolicy: Never
           ports:
             - containerPort: 80
           resources:
