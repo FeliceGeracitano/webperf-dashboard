@@ -30,7 +30,7 @@ spec:
     spec:
       containers:
         - name: wpt-server
-          image: local-wptserver
+          image: felicegeracitano/local-wptserver
           imagePullPolicy: Never
           ports:
             - containerPort: 80

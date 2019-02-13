@@ -30,7 +30,7 @@ spec:
     spec:
       containers:
         - name: wpt-agent
-          image: local-wptagent
+          image: felicegeracitano/local-wptagent
           imagePullPolicy: Never
           ports:
             - containerPort: 80
