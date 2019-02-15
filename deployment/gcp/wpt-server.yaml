@@ -1,6 +1,27 @@
 apiVersion: v1
 kind: Service
 metadata:
+  labels:
+    app: wpt-server
+    component: wpt-server
+  name: wpt-server-loadbalancer
+  namespace: webperf
+spec:
+  externalTrafficPolicy: Cluster
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: wpt-server
+  sessionAffinity: None
+  type: LoadBalancer
+status:
+  loadBalancer: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
   namespace: webperf
   name: wpt-server
 spec:

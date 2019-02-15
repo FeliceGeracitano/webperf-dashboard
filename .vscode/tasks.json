@@ -23,6 +23,27 @@
       "script": "serve",
       "path": "packages/lighthouse/",
       "problemMatcher": []
+    },
+    {
+      "label": "inspector-build",
+      "type": "npm",
+      "script": "build",
+      "path": "packages/inspector/",
+      "problemMatcher": []
+    },
+    {
+      "label": "inspector-start-dev",
+      "type": "npm",
+      "script": "start",
+      "path": "packages/inspector/",
+      "problemMatcher": []
+    },
+    {
+      "label": "inspector-server",
+      "type": "npm",
+      "script": "serve",
+      "path": "packages/inspector/",
+      "problemMatcher": []
     }
   ]
 }

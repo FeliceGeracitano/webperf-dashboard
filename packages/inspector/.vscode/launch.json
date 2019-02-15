@@ -9,14 +9,6 @@
       "request": "launch",
       "name": "Launch Program",
       "program": "${workspaceFolder}/packages/lighthouse/src/index.ts",
-      "preLaunchTask": "lighthouse-build",
-      "outFiles": ["${workspaceFolder}/**/*.js"]
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "Launch Inspector",
-      "program": "${workspaceFolder}/packages/inspector/src/index.ts",
       "preLaunchTask": "inspector-build",
       "outFiles": ["${workspaceFolder}/**/*.js"]
     }
