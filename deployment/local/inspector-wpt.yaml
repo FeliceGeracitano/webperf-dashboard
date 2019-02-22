@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: webperf
+  name: inspector-wpt
+  labels:
+    app: inspector-wpt
+spec:
+  selector:
+    matchLabels:
+      app: inspector-wpt
+  template:
+    metadata:
+      labels:
+        app: inspector-wpt
+    spec:
+      containers:
+        - name: inspector-wpt
+          image: felicegeracitano/inspector-wpt:0.0.1
+          ports:
+            - containerPort: 3000
+          resources:
+          env:
+            - name: DB_HOST
+              value: influxdb
+            - name: WPT_SERVER_HOST
+              value: wpt-server.webperf
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: webperf
+  name: inspector-wpt
+spec:
+  ports:
+    - port: 3000
+      targetPort: 3000
+      nodePort: 30001
+  selector:
+    app: inspector-wpt
+  type: NodePort

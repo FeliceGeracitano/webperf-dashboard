@@ -4,17 +4,14 @@ kind: Service
 metadata:
   namespace: webperf
   name: influxdb
-  labels:
-    component: influxdb
-    app: influxdb
 spec:
-  clusterIP: None
   ports:
     - port: 8086
-      name: server
+      targetPort: 8086
+      nodePort: 30006
   selector:
-    component: influxdb
-  publishNotReadyAddresses: true
+    app: influxdb
+  type: NodePort
 ---
 # Section: influxdb statefulset
 apiVersion: apps/v1
@@ -41,13 +38,6 @@ spec:
       containers:
         - name: influxdb
           image: docker.io/influxdb:1.6
-          lifecycle:
-            postStart:
-              exec:
-                command:
-                  - /bin/sh
-                  - "-c"
-                  - until curl -s http://localhost:8086/ping; do sleep 1; done; influx -execute "CREATE DATABASE \"${MONITOR_DATABASE}\" WITH DURATION 600d NAME ${MONITOR_RP}"
           env:
             - name: INFLUXDB_IFQL_ENABLED
               value: "true"
@@ -55,10 +45,6 @@ spec:
               value: "error"
             - name: INFLUXDB_HTTP_LOG_ENABLED
               value: "false"
-            - name: MONITOR_RP
-              value: "autogen"
-            - name: MONITOR_DATABASE
-              value: "lighthouse"
           volumeMounts:
             - name: data
               mountPath: /var/lib/influxdb

@@ -16,7 +16,7 @@ router.get('/', async (req: express.Request, res: express.Response) => {
     const reportJSON = await utils.audit(url, mobile, fvonly);
     const parsedReport = utils.parseReport(reportJSON);
     if (saveInDB) DB.saveInDB(url, mobile, fvonly, parsedReport);
-    res.status(201).send(reportJSON);
+    res.status(201).send(parsedReport);
   } catch (err) {
     console.log(`Failed to get or save data for ${url} ${JSON.stringify(err)}`);
     res.sendStatus(500);

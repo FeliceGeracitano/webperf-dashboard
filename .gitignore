@@ -1,11 +1,9 @@
 /packages/.DS_Store
 /packages/influxdb/volume
 /packages/grafana/volume/sessions
-
 /packages/lighthouse/build
 /packages/lighthouse/node_modules
 /packages/lighthouse/reports
-
-/packages/inspector/node_modules
-/packages/inspector/build
-/packages/inspector/reports
+/packages/inspector-wpt/build
+/packages/inspector-wpt/reports
+/packages/inspector-wpt/node_modules

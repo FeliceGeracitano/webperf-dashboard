@@ -2,6 +2,6 @@
 export interface IAudit {
   url: string;
   saveInDB?: boolean;
-  mobile?: number;
-  fvonly?: number;
+  mobile?: '1' | '0';
+  fvonly?: '1' | '0';
 }

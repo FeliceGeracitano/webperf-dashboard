@@ -16,6 +16,7 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Inspector",
+      "envFile": "${workspaceFolder}/packages/inspector/.env",
       "program": "${workspaceFolder}/packages/inspector/src/index.ts",
       "preLaunchTask": "inspector-build",
       "outFiles": ["${workspaceFolder}/**/*.js"]

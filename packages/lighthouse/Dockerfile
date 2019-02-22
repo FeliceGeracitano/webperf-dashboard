@@ -15,7 +15,7 @@ RUN \
   sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' && \
   apt-get update && \
   apt-get install -y google-chrome-stable
-
+# TODO: find a way to install fixed version of chrome, this could impact test results, usual google-chrome-stable=X.X.X does not work 
 EXPOSE 3000
 
 CMD ["npm", "run", "serve"]
