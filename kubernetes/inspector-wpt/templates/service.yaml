@@ -4,9 +4,9 @@ metadata:
   name: inspector-wpt
 spec:
   ports:
-    - port: 3000
-      targetPort: 3000
-      nodePort: 30001
+  - name: inspector-wpt
+    port: 80
+    targetPort: 3000
   selector:
     app: inspector-wpt
-  type: NodePort
+  type: LoadBalancer
