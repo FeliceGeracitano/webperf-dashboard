@@ -23,4 +23,4 @@ spec:
             - name: DB_HOST
               value: influxdb
             - name: WPT_SERVER_HOST
-              value: wpt-server
+              value: webpagetest-server-webpagetest-server
