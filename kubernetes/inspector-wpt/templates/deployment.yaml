@@ -25,4 +25,4 @@ spec:
             - name: WPT_SERVER_HOST
               value: {{ .Values.wptServerHost }}
             - name: WPT_SERVER_URL_PORT
-              value: {{ .Values.wptServerPort }}
+              value: "{{ .Values.wptServerHost }}"
