@@ -1,0 +1,22 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wpt-server
+  labels:
+    app: wpt-server
+spec:
+  selector:
+    matchLabels:
+      app: wpt-server
+  template:
+    metadata:
+      labels:
+        app: wpt-server
+    spec:
+      containers:
+        - name: wpt-server
+          image: felicegeracitano/local-wptserver
+          ports:
+            - containerPort: 80
+          resources:

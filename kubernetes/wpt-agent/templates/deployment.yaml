@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wpt-agent
+  labels:
+    app: wpt-agent
+spec:
+  selector:
+    matchLabels:
+      app: wpt-agent
+  template:
+    metadata:
+      labels:
+        app: wpt-agent
+    spec:
+      containers:
+        - name: wpt-agent
+          image: felicegeracitano/local-wptagent
+          ports:
+            - containerPort: 80
+          resources:
+          env:
+            - name: LOCATION
+              value: {{ .Values.location }}
+            - name: SERVER_URL
+              value: http://{{ .Values.wptServer }}/work/
