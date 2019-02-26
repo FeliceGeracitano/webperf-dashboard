@@ -1,1 +1,2 @@
 wptServerHost: webpagetest-server-webpagetest-server
+wptServerPort: "80"
