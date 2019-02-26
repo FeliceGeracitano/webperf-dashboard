@@ -23,6 +23,6 @@ spec:
             - name: DB_HOST
               value: influxdb
             - name: WPT_SERVER_HOST
-              value: webpagetest-server-webpagetest-server
+              value: {{ .Values.wptServerHost }}
             - name: WPT_SERVER_URL_PORT
               value: "80"
