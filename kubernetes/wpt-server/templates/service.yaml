@@ -8,4 +8,4 @@ spec:
       targetPort: 80
   selector:
     app: wpt-server
-  type: NodePort
+  type: LoadBalancer
