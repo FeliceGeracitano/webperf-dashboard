@@ -24,3 +24,5 @@ spec:
               value: influxdb
             - name: WPT_SERVER_HOST
               value: webpagetest-server-webpagetest-server
+            - name: WPT_SERVER_URL_PORT
+              value: "80"
