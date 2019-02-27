@@ -2,10 +2,12 @@ apiVersion: v1
 kind: Service
 metadata:
   name: lighthouse
+  annotations:
+    {{ toYaml .Values.service.annotations | indent 4 }}
 spec:
   ports:
     - port: 80
       targetPort: 3000
   selector:
     app: lighthouse
-  type: NodePort
+  type: LoadBalancer

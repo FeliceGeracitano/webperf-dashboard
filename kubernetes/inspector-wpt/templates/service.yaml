@@ -2,6 +2,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: inspector-wpt
+  annotations:
+    {{ toYaml .Values.service.annotations | indent 4 }}
 spec:
   ports:
   - name: inspector-wpt

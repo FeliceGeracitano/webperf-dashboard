@@ -1,2 +1,4 @@
 wptServerHost: webpagetest-server-webpagetest-server
 wptServerPort: "80"
+service:
+  annotations:
