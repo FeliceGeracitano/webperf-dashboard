@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: lighthouse
+  name: inspector-lighthouse
   labels:
-    app: lighthouse
+    app: inspector-lighthouse
 spec:
   selector:
     matchLabels:
-      app: lighthouse
+      app: inspector-lighthouse
   template:
     metadata:
       labels:
-        app: lighthouse
+        app: inspector-lighthouse
     spec:
       containers:
-        - name: lighthouse
+        - name: inspector-lighthouse
           image: felicegeracitano/webperf-dashboard-lighthouse:2.0
           ports:
             - containerPort: 3000
