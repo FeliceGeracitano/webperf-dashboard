@@ -1,10 +1,10 @@
 import db from './influxdb';
-import { CollectItem } from './types';
+import { ICollectItem } from './types';
 import utils from './utils';
 import Logger from './logger';
 const console = new Logger('[App]: ');
 
-async function runLighthouse(item: CollectItem) {
+async function runLighthouse(item: ICollectItem) {
   try {
     const { url, report } = item;
     if (!url) return undefined;

@@ -7,18 +7,19 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch Program",
-      "program": "${workspaceFolder}/packages/lighthouse/src/index.ts",
-      "preLaunchTask": "lighthouse-build",
+      "name": "Launch Lighthouse",
+      "envFile": "${workspaceFolder}/packages/inspector-lighthouse/.env",
+      "program": "${workspaceFolder}/packages/inspector-lighthouse/src/index.ts",
+      "preLaunchTask": "inspector-lighthouse-build",
       "outFiles": ["${workspaceFolder}/**/*.js"]
     },
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch Inspector",
-      "envFile": "${workspaceFolder}/packages/inspector/.env",
-      "program": "${workspaceFolder}/packages/inspector/src/index.ts",
-      "preLaunchTask": "inspector-build",
+      "name": "Launch WPT",
+      "envFile": "${workspaceFolder}/packages/inspector-wpt/.env",
+      "program": "${workspaceFolder}/packages/inspector-wpt/src/index.ts",
+      "preLaunchTask": "inspector-wpt-build",
       "outFiles": ["${workspaceFolder}/**/*.js"]
     }
   ]

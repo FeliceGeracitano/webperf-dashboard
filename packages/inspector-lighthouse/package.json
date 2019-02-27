@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rm -rf ./build/* && tsc",
     "serve": "node build/index.js",
-    "start": "nodemon --exec ./node_modules/.bin/ts-node -- ./src/index.ts"
+    "start": "export $(cat .env | xargs) && nodemon --exec ./node_modules/.bin/ts-node -- ./src/index.ts"
   },
   "keywords": [],
   "author": "",

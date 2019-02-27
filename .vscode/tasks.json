@@ -4,45 +4,17 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "lighthouse-build",
+      "label": "inspector-lighthouse-build",
       "type": "npm",
       "script": "build",
-      "path": "packages/lighthouse/",
+      "path": "packages/inspector-lighthouse/",
       "problemMatcher": []
     },
     {
-      "label": "lighthouse-start-dev",
-      "type": "npm",
-      "script": "start",
-      "path": "packages/lighthouse/",
-      "problemMatcher": []
-    },
-    {
-      "label": "lighthouse-server",
-      "type": "npm",
-      "script": "serve",
-      "path": "packages/lighthouse/",
-      "problemMatcher": []
-    },
-    {
-      "label": "inspector-build",
+      "label": "inspector-wpt-build",
       "type": "npm",
       "script": "build",
-      "path": "packages/inspector/",
-      "problemMatcher": []
-    },
-    {
-      "label": "inspector-start-dev",
-      "type": "npm",
-      "script": "start",
-      "path": "packages/inspector/",
-      "problemMatcher": []
-    },
-    {
-      "label": "inspector-server",
-      "type": "npm",
-      "script": "serve",
-      "path": "packages/inspector/",
+      "path": "packages/inspector-wpt/",
       "problemMatcher": []
     }
   ]

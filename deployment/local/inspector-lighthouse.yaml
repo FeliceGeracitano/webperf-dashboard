@@ -16,13 +16,15 @@ spec:
     spec:
       containers:
         - name: lighthouse
-          image: felicegeracitano/webperf-dashboard-lighthouse:2.0
+          image: felicegeracitano/webperf-dashboard-lighthouse:2.0.4
           ports:
             - containerPort: 3000
           resources:
           env:
-            - name: HOST
+            - name: DB_HOST
               value: influxdb
+            - name: DB_PORT
+              value: "8086"
 ---
 apiVersion: v1
 kind: Service

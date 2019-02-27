@@ -4,6 +4,9 @@
 /packages/lighthouse/build
 /packages/lighthouse/node_modules
 /packages/lighthouse/reports
+/packages/inspector-lighthouse/build
+/packages/inspector-lighthouse/node_modules
+/packages/inspector-lighthouse/reports
 /packages/inspector-wpt/build
 /packages/inspector-wpt/reports
 /packages/inspector-wpt/node_modules

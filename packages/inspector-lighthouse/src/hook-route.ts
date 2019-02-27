@@ -11,7 +11,7 @@ router.post('/', async (req: express.Request, res: express.Response) => {
   try {
     await octokit.authenticate({ type: 'token', token });
     if (headers['x-github-event'] === 'ping') return res.status(201).send('PONG');
-    const { raw, dbPayload } = await utils.audit(url);
+    const { raw, dbPayload } = await utils.audit(url, false, undefined);
     const comment = utils.generateGitHubComment(dbPayload, raw);
     await octokit.issues.createComment({ owner, repo, number, body: comment });
     return res.status(200).send(`Data ${dbPayload}`);

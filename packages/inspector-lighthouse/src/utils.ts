@@ -1,11 +1,9 @@
 import * as chromeLauncher from 'chrome-launcher';
 import * as fs from 'fs-extra';
 import * as lighthouse from 'lighthouse';
-import * as lighthouseLog from 'lighthouse-logger';
 import * as ReportGenerator from 'lighthouse/lighthouse-core/report/report-generator';
 import * as path from 'path';
 import { path as Rpath, pipe } from 'ramda';
-import db from './influxdb';
 import Logger from './logger';
 import {
   IAudits,
@@ -47,13 +45,24 @@ const filterResults = (data: ILighthouseRespose): IDBPayload => {
   return report;
 };
 
-const audit = async (url: string): Promise<ILighthouseAuditReport> => {
+const audit = async (
+  url: string,
+  mobile?: boolean,
+  userAgent?: string
+): Promise<ILighthouseAuditReport> => {
   console.log(`Getting data for ${url}`);
-  const chromeFlags = ['--headless', '--no-sandbox', '--disable-gpu'];
-  console.log(`chromeFlags: ${JSON.stringify(chromeFlags)}`);
+  const chromeFlags = [
+    '--headless',
+    '--no-sandbox',
+    '--disable-gpu',
+    `${userAgent ? `--user-agent=${userAgent}` : ``}`
+  ];
   const chrome = await chromeLauncher.launch({ chromeFlags, startingUrl: url });
-  const lhFlags = { port: chrome.port, logLevel: 'info', emulatedFormFactor: 'desktop' };
-  lighthouseLog.setLevel(lhFlags.logLevel);
+  const lhFlags = {
+    port: chrome.port,
+    // https://github.com/GoogleChrome/lighthouse/issues/5406
+    emulatedFormFactor: userAgent ? 'none' : mobile ? 'mobile' : 'desktop'
+  };
   const result = await lighthouse(url, lhFlags);
   const raw = await chrome.kill().then(() => result.lhr);
   console.log(`Successfully got data for ${url}`);

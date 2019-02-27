@@ -7,7 +7,7 @@
       "label": "lighthouseBuild",
       "type": "npm",
       "script": "build",
-      "path": "lighthouse/",
+      "path": "inspector-lighthouse/",
       "problemMatcher": []
     }
   ]

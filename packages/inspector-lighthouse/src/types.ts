@@ -105,8 +105,11 @@ export interface IDBPayload {
 export type GithubStatus = 'error' | 'failure' | 'pending' | 'success';
 
 // API Collect
-export interface CollectItem {
+export interface ICollectItem {
   url: string;
-  report: boolean;
+  report?: string;
+  mobile?: string;
+  userAgent?: string;
+  saveInDB?: string;
 }
-export type CollectAPIPayload = CollectItem[];
+export type CollectAPIPayload = ICollectItem[];
