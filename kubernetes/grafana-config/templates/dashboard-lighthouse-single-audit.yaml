@@ -6,5 +6,5 @@ metadata:
   labels:
     grafana-dashboard/global: "true"
 data:
-  jvm-dashboard.json: |-
+  lighthouse-single-audit.json: |-
     {{ .Files.Get "files/lighthouse-single-audit.json" | indent 4 | trim }}
