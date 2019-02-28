@@ -1,0 +1,26 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-datasource
+data:
+  datasource.yaml: |-
+    apiVersion: 1
+    datasources:
+    - name: Lighthouse
+      type: influxdb
+      access: proxy
+      orgId: 1
+      url: http://influxdb:8086
+      database: lighthouse
+      isDefault: true
+      jsonData:
+        graphiteVersion: "1.1"
+        tlsAuth: false
+        tlsAuthWithCACert: false
+      secureJsonData:
+        tlsCACert: "..."
+        tlsClientCert: "..."
+        tlsClientKey: "..."
+      version: 1
+      editable: trues
