@@ -1,0 +1,10 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: lighthouse-vs
+  labels:
+    grafana-dashboard/global: "true"
+data:
+  lighthouse-vs.json: |-
+    {{ .Files.Get "files/lighthouse-vs.json" | indent 4 | trim }}

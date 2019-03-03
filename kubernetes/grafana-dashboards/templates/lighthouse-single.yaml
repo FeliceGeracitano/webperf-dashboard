@@ -1,0 +1,10 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: lighthouse-single
+  labels:
+    grafana-dashboard/global: "true"
+data:
+  lighthouse-single.json: |-
+    {{ .Files.Get "files/lighthouse-single.json" | indent 4 | trim }}
