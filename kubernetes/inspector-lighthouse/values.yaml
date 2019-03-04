@@ -1,8 +1,6 @@
 service:
   annotations:
 
-schedule: "*/30 * * * *"
-
 # as bash array string
 urls: "(https://www.saksfifthavenue.com https://www.thebay.com https://www.lordandtaylor.com https://www.saksoff5th.com)"
 

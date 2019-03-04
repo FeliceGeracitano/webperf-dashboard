@@ -4,7 +4,7 @@ kind: CronJob
 metadata:
   name: lighthouse-audit-job
 spec:
-  schedule: {{ .Values.schedule }}
+  schedule: "*/30 * * * *"
   successfulJobsHistoryLimit: 3
   failedJobsHistoryLimit: 3
   jobTemplate:
