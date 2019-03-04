@@ -17,15 +17,15 @@ spec:
               command: ["bash", "-c"]
               args: [
                 'set -x;
-                 for i in "${URLS[@]}";
-                  do curl -G ${LIGHTHOUSE_URL} \
-                  --data-urlencode "url=${i}" \
-                  --data-urlencode "mobile=${MOBILE}" \
-                  --data-urlencode "userAgent=${USER_AGENT}" \
-                  --data-urlencode "report=true" \
-                  --data-urlencode "saveInDB=true";
-                 done;
-                ',
+                 ARR=($(echo $URLS));
+                 echo $ARR;
+                 for i in "${ARR[@]}";
+                  do curl -v -G ${LIGHTHOUSE_URL} --data-urlencode "url=${i}" \
+--data-urlencode "mobile=${MOBILE}" \
+--data-urlencode "userAgent=${USER_AGENT}" \
+--data-urlencode "report=true" \
+--data-urlencode "saveInDB=true";
+                 done;'
               ]
               env:
               - name: URLS
