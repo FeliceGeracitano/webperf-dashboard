@@ -4,7 +4,7 @@ kind: CronJob
 metadata:
   name: lighthouse-audit-job
 spec:
-  schedule: "*/30 * * * *"
+  schedule: {{ .Values.schedule }}
   successfulJobsHistoryLimit: 3
   failedJobsHistoryLimit: 3
   jobTemplate:
@@ -18,17 +18,22 @@ spec:
               args: [
                 'set -x;
                  for i in "${URLS[@]}";
-                  do curl ${LIGHTHOUSE_URL}?url=${i}&mobile=${MOBILE}&userAgent=${USER_AGENT}&report=true&saveInDB=true;
+                  do curl -G ${LIGHTHOUSE_URL} \
+                  --data-urlencode "url=${i}" \
+                  --data-urlencode "mobile=${MOBILE}" \
+                  --data-urlencode "userAgent=${USER_AGENT}" \
+                  --data-urlencode "report=true" \
+                  --data-urlencode "saveInDB=true";
                  done;
                 ',
               ]
               env:
               - name: URLS
-                value: (https://www.saksfifthavenue.com https://www.thebay.com https://www.lordandtaylor.com)
+                value: {{ .Values.urls }}
               - name: MOBILE
                 value: "true"
               - name: USER_AGENT
-                value: "Mozilla/5.0 (iPhone; CPU iPhone OS 11_0_3 like Mac OS X, ) AppleWebKit/604.1.38 (KHTML, like Gecko, HBC-Akamai-BOT) Mobile/15A432"
+                value: {{ .Values.agent }}
               - name: LIGHTHOUSE_URL
-                value: http://inspector-lighthouse.observe.tools.common.awshbc.io/collect-one
+                value: {{ .Values.audit_url }}
           restartPolicy: Never

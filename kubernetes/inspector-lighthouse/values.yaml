@@ -1,2 +1,11 @@
 service:
   annotations:
+
+schedule: "*/30 * * * *"
+
+# as bash array string
+urls: "(https://www.saksfifthavenue.com https://www.thebay.com https://www.lordandtaylor.com https://www.saksoff5th.com)"
+
+agent: "Mozilla/5.0 (iPhone; CPU iPhone OS 11_0_3) AppleWebKit/604.1.38 (KHTML, like Gecko, HBC-Akamai-BOT) Mobile/15A432"
+
+audit_url: http://inspector-lighthouse.observe.tools.common.awshbc.io/collect-one
