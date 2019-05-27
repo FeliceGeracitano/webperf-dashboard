@@ -25,6 +25,7 @@ services:
       - 80:3000
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=secret
+      - GF_PANELS_DISABLE_SANITIZE_HTML=true
     volumes:
       - "./packages/grafana/volume:/var/lib/grafana"
       - "./packages/grafana/provisioning:/etc/grafana/provisioning"
